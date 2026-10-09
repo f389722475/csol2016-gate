@@ -6,12 +6,12 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="description" content="CSOL2016 独立登录器 · 账号年限与设备授权验证">
   <title>CSOL2016 · Access Verification</title>
-  <link rel="stylesheet" href="styles.css?v=3"><script src="config.js" defer></script><script src="app.js?v=3" defer></script>
+  <link rel="stylesheet" href="styles.css?v=4"><script src="config.js" defer></script><script src="app.js?v=4" defer></script>
 </head>
 <body>
   <header class="topbar"><div class="navwrap">
     <a class="brand" href="./" aria-label="CSOL2016 验证首页"><span class="monogram">CS</span><span>CSOL2016<span class="brand-caption" data-i18n="portal">ACCESS PORTAL</span></span></a>
-    <div class="navend"><span class="private-label"><span class="tiny-dot"></span><span data-i18n="private">隐私优先</span></span><button id="language" class="language" aria-label="Switch language">CN <span>/ EN</span></button></div>
+    <div class="navend"><span id="role-badge" class="role-badge" hidden></span><span class="private-label"><span class="tiny-dot"></span><span data-i18n="private">隐私优先</span></span><button id="language" class="language" aria-label="Switch language">CN <span>/ EN</span></button></div>
   </div></header>
   <main>
     <div class="hero">
@@ -42,7 +42,7 @@
       </aside>
     </div>
     <section id="admin-panel" class="admin-panel" hidden aria-labelledby="admin-title">
-      <div class="section-top"><div><div class="side-eyebrow">ADMIN WORKSPACE</div><h2 id="admin-title" data-i18n="adminTitle">授权管理</h2></div><button id="admin-refresh" class="secondary" data-i18n="refresh">刷新</button></div>
+      <div class="section-top"><div><div class="side-eyebrow">ACCESS MANAGEMENT</div><h2 id="admin-title" data-i18n="adminTitle">授权管理</h2></div><button id="admin-refresh" class="secondary" data-i18n="refresh">刷新</button></div>
       <div class="admin-form"><label><span data-i18n="codeLabel">备注</span><input id="code-label" maxlength="80" placeholder="例如：朋友的设备"></label><label class="days"><span data-i18n="days">兑换有效期（天）</span><input id="code-days" type="number" min="1" max="365" value="30"></label><button id="create-code" class="primary" data-i18n="createCode">生成授权码</button></div>
       <div id="new-code-wrap" class="new-code" hidden><span data-i18n="saveCode">一次性授权码</span><div><code id="new-code"></code><button id="copy-code" class="secondary" data-i18n="copy">复制</button></div></div>
       <h3 class="table-title" data-i18n="codesTitle">最近授权码</h3><div class="table-scroll"><table><thead><tr><th data-i18n="codeLabel">备注</th><th data-i18n="status">状态</th><th data-i18n="expiresAt">兑换截止</th><th data-i18n="actions">操作</th></tr></thead><tbody id="codes-list"></tbody></table></div>
