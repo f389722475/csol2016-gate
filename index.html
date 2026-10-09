@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="description" content="CSOL2016 独立登录器 · 账号年限与设备授权验证">
   <title>CSOL2016 · Access Verification</title>
-  <link rel="stylesheet" href="styles.css"><script src="config.js" defer></script><script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=3"><script src="config.js" defer></script><script src="app.js?v=3" defer></script>
 </head>
 <body>
   <header class="topbar"><div class="navwrap">
@@ -14,42 +14,43 @@
     <div class="navend"><span class="private-label"><span class="tiny-dot"></span><span data-i18n="private">隐私优先</span></span><button id="language" class="language" aria-label="Switch language">CN <span>/ EN</span></button></div>
   </div></header>
   <main>
-    <div class="eyebrow"><span class="tiny-dot"></span><span data-i18n="eyebrow">A SIMPLE CHECK. YOUR OWN DEVICE.</span></div>
+    <div class="hero">
     <h1 data-i18n="title">验证一次，安心进入。</h1>
-    <p class="intro" data-i18n="intro">连接 GitHub 与 Discord，确认两个账号都已满两年。<br>完成后，即可回到登录器注册或登录。</p>
+    <aside class="support-card"><p data-i18n="supportContact">有问题请加QQ群联系：</p><strong>706396024</strong></aside></div>
     <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
     <div class="workspace">
       <section class="verification-card" aria-labelledby="verification-heading">
-        <div class="section-top"><div><h2 id="verification-heading" data-i18n="connect">连接你的账号</h2><p data-i18n="connectHelp">由官方 OAuth 授权，不需要向本站提供密码。</p></div><span class="step" id="progress">0 / 2</span></div>
+        <div class="section-top"><div><h2 id="verification-heading" data-i18n="connect">连接你的账号</h2></div><span class="step" id="progress">0 / 2</span></div>
         <article class="provider" id="github-card">
-          <div class="provider-head"><div class="provider-brand"><div class="icon-wrap"><img src="assets/github.svg" width="32" height="32" alt="GitHub 官方标志"></div><div><h3>GitHub</h3><p data-i18n="githubSource">通过官方 API 核验注册时间</p></div></div><span id="github-badge" class="badge" data-i18n="notConnected">未连接</span></div>
+          <div class="provider-head"><div class="provider-brand"><div class="icon-wrap"><img src="assets/github.svg" width="32" height="32" alt="GitHub 官方标志"></div><div><h3>GitHub</h3></div></div><span id="github-badge" class="badge" data-i18n="notConnected">未连接</span></div>
           <div class="provider-detail"><div><span data-i18n="account">账号</span><strong id="github-login">—</strong></div><div><span data-i18n="createdAt">注册日期</span><strong id="github-date">—</strong></div><div><span data-i18n="requirement">要求</span><strong data-i18n="twoYears">满两年</strong></div></div>
           <p id="github-result" class="provider-result"></p>
           <button id="github-connect" class="connect-button"><span data-i18n="connectGithub">连接 GitHub</span><span aria-hidden="true">↗</span></button>
         </article>
         <article class="provider" id="discord-card">
-          <div class="provider-head"><div class="provider-brand"><div class="icon-wrap"><img src="assets/discord.svg" width="32" height="25" alt="Discord 官方标志"></div><div><h3>Discord</h3><p data-i18n="discordSource">由官方账号 ID 解析创建时间</p></div></div><span id="discord-badge" class="badge" data-i18n="notConnected">未连接</span></div>
+          <div class="provider-head"><div class="provider-brand"><div class="icon-wrap"><img src="assets/discord.svg" width="32" height="25" alt="Discord 官方标志"></div><div><h3>Discord</h3></div></div><span id="discord-badge" class="badge" data-i18n="notConnected">未连接</span></div>
           <div class="provider-detail"><div><span data-i18n="account">账号</span><strong id="discord-login">—</strong></div><div><span data-i18n="createdAt">注册日期</span><strong id="discord-date">—</strong></div><div><span data-i18n="requirement">要求</span><strong data-i18n="twoYears">满两年</strong></div></div>
           <p id="discord-result" class="provider-result"></p>
           <button id="discord-connect" class="connect-button discord-connect"><span data-i18n="connectDiscord">连接 Discord</span><span aria-hidden="true">↗</span></button>
         </article>
-        <div class="finalize"><label id="consent-wrap"><input type="checkbox" id="consent"><span data-i18n="consent">我确认将授权绑定到下方显示的当前设备。</span></label><button id="complete" class="primary" disabled data-i18n="complete">完成验证并授权设备</button><p class="footnote" id="complete-hint" data-i18n="bothRequired">两个账号需分别满两年，缺一不可。</p></div>
+        <div class="finalize"><label id="consent-wrap"><input type="checkbox" id="consent"><span data-i18n="consent">授权绑定当前设备</span></label><button id="complete" class="primary" disabled data-i18n="complete">完成验证并授权设备</button></div>
       </section>
       <aside class="side">
-        <section class="device-card"><div class="side-eyebrow" data-i18n="thisDevice">CURRENT DEVICE</div><div class="device-illustration" aria-hidden="true"><div class="screen"><div class="screen-line"></div><span>CS</span><div class="screen-line short"></div></div><div class="stand"></div></div><h2 data-i18n="deviceTitle">只属于这台设备</h2><p data-i18n="deviceHelp">授权使用本机生成的随机密钥识别设备，不扫描你的硬件。</p><div class="fingerprint"><span data-i18n="deviceFingerprint">设备公钥摘要</span><code id="device-id">等待登录器连接</code></div><div class="device-status"><span class="tiny-dot"></span><span id="device-status" data-i18n="devicePending">等待本机签名验证</span></div></section>
-        <section class="privacy-card"><h3 data-i18n="privacyTitle">少一点信息，多一点安心。</h3><ul><li data-i18n="privacy1">不收集邮箱、硬盘序列号或 MAC 地址</li><li data-i18n="privacy2">不读取仓库、私信或 Discord 服务器</li><li data-i18n="privacy3">不向验证平台发送游戏账号和密码</li></ul><button id="privacy-open" class="text-button" data-i18n="privacyDetails">查看数据与权限说明 →</button></section>
-        <section class="code-tip"><span class="label-pill" data-i18n="alternative">另一种方式</span><h3 data-i18n="haveCode">已有授权码？</h3><p data-i18n="codeHelp">回到登录器「启动设置」兑换，即可免年限验证；普通用户仍绑定当前设备。</p></section>
+        <section class="device-card"><div class="side-eyebrow" data-i18n="thisDevice">CURRENT DEVICE</div><div class="device-illustration" aria-hidden="true"><div class="screen"><div class="screen-line"></div><span>CS</span><div class="screen-line short"></div></div><div class="stand"></div></div><h2 data-i18n="deviceTitle">只属于这台设备</h2><div class="fingerprint"><span data-i18n="deviceFingerprint">设备公钥摘要</span><code id="device-id">等待登录器连接</code></div><div class="device-status"><span class="tiny-dot"></span><span id="device-status" data-i18n="devicePending">等待本机签名验证</span></div></section>
+        
+        
       </aside>
     </div>
     <section id="admin-panel" class="admin-panel" hidden aria-labelledby="admin-title">
-      <div class="section-top"><div><div class="side-eyebrow">ADMIN WORKSPACE</div><h2 id="admin-title" data-i18n="adminTitle">授权管理</h2><p data-i18n="adminHelp">管理员免年限与固定设备绑定。授权码仅生成时显示一次。</p></div><button id="admin-refresh" class="secondary" data-i18n="refresh">刷新</button></div>
+      <div class="section-top"><div><div class="side-eyebrow">ADMIN WORKSPACE</div><h2 id="admin-title" data-i18n="adminTitle">授权管理</h2></div><button id="admin-refresh" class="secondary" data-i18n="refresh">刷新</button></div>
       <div class="admin-form"><label><span data-i18n="codeLabel">备注</span><input id="code-label" maxlength="80" placeholder="例如：朋友的设备"></label><label class="days"><span data-i18n="days">兑换有效期（天）</span><input id="code-days" type="number" min="1" max="365" value="30"></label><button id="create-code" class="primary" data-i18n="createCode">生成授权码</button></div>
-      <div id="new-code-wrap" class="new-code" hidden><span data-i18n="saveCode">请现在复制并妥善保存，完整授权码不会再次展示。</span><div><code id="new-code"></code><button id="copy-code" class="secondary" data-i18n="copy">复制</button></div></div>
+      <div id="new-code-wrap" class="new-code" hidden><span data-i18n="saveCode">一次性授权码</span><div><code id="new-code"></code><button id="copy-code" class="secondary" data-i18n="copy">复制</button></div></div>
       <h3 class="table-title" data-i18n="codesTitle">最近授权码</h3><div class="table-scroll"><table><thead><tr><th data-i18n="codeLabel">备注</th><th data-i18n="status">状态</th><th data-i18n="expiresAt">兑换截止</th><th data-i18n="actions">操作</th></tr></thead><tbody id="codes-list"></tbody></table></div>
+      <h3 class="table-title" data-i18n="bansTitle">设备封禁</h3><div class="table-scroll"><table><thead><tr><th data-i18n="deviceFingerprint">设备公钥摘要</th><th data-i18n="status">状态</th><th data-i18n="actions">操作</th></tr></thead><tbody id="bans-list"></tbody></table></div>
       <h3 class="table-title" data-i18n="grantsTitle">最近设备授权</h3><div class="table-scroll"><table><thead><tr><th data-i18n="type">类型</th><th data-i18n="deviceFingerprint">设备公钥摘要</th><th data-i18n="status">状态</th><th data-i18n="actions">操作</th></tr></thead><tbody id="grants-list"></tbody></table></div>
     </section>
-    <footer><span>CSOL2016 <span class="footer-separator">/</span> ACCESS VERIFICATION</span><span data-i18n="independent">独立验证服务 · 非 GitHub 或 Discord 官方产品</span></footer>
+    <footer><span>CSOL2016 <span class="footer-separator">/</span> ACCESS VERIFICATION</span><button id="privacy-open" class="text-button" data-i18n="privacyDetails">数据与权限</button></footer>
   </main>
-  <dialog id="privacy-dialog"><button id="privacy-close" class="dialog-close" aria-label="关闭">×</button><div class="side-eyebrow">PRIVACY & PERMISSIONS</div><h2 data-i18n="privacyHeading">仅收集验证所必需的信息</h2><p data-i18n="privacyBody">我们保存账号固定 ID、公开用户名、账号创建日期，以及设备公钥和摘要。GitHub 不申请额外权限，Discord 仅申请 identify。OAuth 令牌只用于当次核验，不持久保存。授权码仅存服务端加盐摘要。短期防滥用限流使用不可逆网络地址摘要，不保存原始地址。设备私钥留在 Windows 密钥存储中，优先使用 TPM。验证会话 30 天过期，网页会话 30 分钟过期；授权和账号绑定保留至管理员撤销或处理删除请求。管理员可查看与撤销授权，但无法读取你的游戏密码。</p><p data-i18n="privacyBoundary">此验证仅约束独立登录器；不修改游戏或服务器，不能阻止被修改的程序或直接运行原生客户端。</p></dialog>
+  <dialog id="privacy-dialog"><button id="privacy-close" class="dialog-close" aria-label="关闭">×</button><div class="side-eyebrow">PRIVACY & PERMISSIONS</div><h2 data-i18n="privacyHeading">仅收集验证所必需的信息</h2><p data-i18n="privacyBody">我们保存账号固定 ID、公开用户名、账号创建日期，以及设备公钥和摘要。GitHub 不申请额外权限，Discord 仅申请 identify。OAuth 令牌只用于当次核验，不持久保存。未兑换的授权码仅存服务端加盐摘要；兑换或撤销后销毁摘要，仅保留非秘密审计记录。短期防滥用限流使用不可逆网络地址摘要，不保存原始地址。设备私钥留在 Windows 密钥存储中，优先使用 TPM。验证会话 30 天过期，网页会话 30 分钟过期；授权和账号绑定保留至管理员撤销或处理删除请求。设备签名同时覆盖登录器版本与 SHA-256；非官方改动被检测后会封禁该设备密钥。管理员可查看、撤销授权和解除封禁，但无法读取你的游戏密码。</p><p data-i18n="privacyBoundary">此验证仅约束独立登录器；不修改游戏或服务器，不能阻止被修改的程序或直接运行原生客户端。</p></dialog>
 </body>
 </html>
